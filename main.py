@@ -17,14 +17,22 @@ async def ascii_art(update: Update, context: ContextTypes.DEFAULT_TYPE):
 ＼   ／   (･ω･ )
 ((＼／     ⊂ )
 """
+
     await update.message.reply_text(art)
 
-def main():
-    app = Application.builder().token(TOKEN).build()
-    app.add_handler(
-        MessageHandler(filters.TEXT & ~filters.COMMAND, ascii_art)
-    )
-    app.run_polling()
+async def post_init(app):
+    print("Bot started successfully!")
+
+app = (
+    Application.builder()
+    .token(TOKEN)
+    .post_init(post_init)
+    .build()
+)
+
+app.add_handler(
+    MessageHandler(filters.TEXT & ~filters.COMMAND, ascii_art)
+)
 
 if __name__ == "__main__":
-    main()
+    app.run_polling()
