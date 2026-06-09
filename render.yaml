@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: ascii-art-bot
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python main.py
