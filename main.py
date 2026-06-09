@@ -20,8 +20,16 @@ async def ascii_art(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     await update.message.reply_text(art)
 
-app = Application.builder().token(TOKEN).build()
 
-app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, ascii_art))
+def main():
+    app = Application.builder().token(TOKEN).build()
 
-app.run_polling()
+    app.add_handler(
+        MessageHandler(filters.TEXT & ~filters.COMMAND, ascii_art)
+    )
+
+    app.run_polling()
+
+
+if __name__ == "__main__":
+    main()
